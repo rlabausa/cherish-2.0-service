@@ -1,12 +1,15 @@
 package com.rlabausa.cherishservice.photos.models;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @Table(name = "PHOTO")
 public class Photo {
+
     @Transient
-    private final String URL_BASE = "TODO";
+    @Value("${app.cherish.url}")
+    private String URL_BASE;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +30,6 @@ public class Photo {
 
     public Long getId() {
         return id;
-    }
-
-    public String getFilepath() {
-        return filepath;
     }
 
     public String getUrl() {
