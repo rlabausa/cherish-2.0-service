@@ -7,11 +7,6 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
-import java.util.stream.Collectors;
-
-
 @RestController
 @RequestMapping("/posts")
 public class PostController {
@@ -28,18 +23,9 @@ public class PostController {
 
     @GetMapping
     public CollectionModel<EntityModel<Post>> getAllPosts() {
-        var posts = this.postService.getAllPosts()
-                .stream()
-                .map(assembler::toModel)
-                .collect(Collectors.toList());
+        var posts = this.postService.getAllPosts();
 
-        return CollectionModel.of(
-                posts,
-                linkTo(
-                        methodOn(PostController.class)
-                                .getAllPosts()
-                ).withSelfRel()
-        );
+        return assembler.toCollectionModel(posts);
     }
 
     @GetMapping("/{id}")
