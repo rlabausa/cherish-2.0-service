@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@Component // annotation indicates that the assembler is automatically created when the app starts
+
+// @Component annotation indicates that this PostModelAssembler is automatically created when the app starts
+@Component
 public class PostModelAssembler implements RepresentationModelAssembler<Post, EntityModel<Post>> {
 
     @Override
